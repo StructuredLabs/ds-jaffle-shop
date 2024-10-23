@@ -1,0 +1,32 @@
+# models/marts/generated_leads.yml
+
+version: 2
+
+models:
+  - name: generated_leads
+    description: This model represents the count of generated leads over the last month.
+    columns:
+      - name: lead_count
+        description: The total count of leads generated in the last month
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "lead_count >= 0"
+
+sources:
+  - name: ecom
+    schema: ds_jaffle_shop
+    tables:
+      - name: leads
+        description: Table containing lead information
+        columns:
+          - name: lead_id
+            tests:
+              - unique
+              - not_null
+          - name: lead_name
+          - name: lead_generated_date
+            tests:
+              - not_null
