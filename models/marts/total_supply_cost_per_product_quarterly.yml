@@ -1,0 +1,29 @@
+# models/marts/total_supply_cost_per_product_quarterly.yml
+
+version: 2
+
+models:
+  - name: total_supply_cost_per_product_quarterly
+    description: "This model represents the total supply cost per product every quarter per financial year"
+    columns:
+      - name: quarter
+        description: "The quarter for which the supply cost is calculated"
+        tests:
+          - not_null
+      - name: financial_year
+        description: "The financial year for which the supply cost is calculated"
+        tests:
+          - not_null
+      - name: product_id
+        description: "The unique identifier for each product"
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "The name of the product"
+        tests:
+          - not_null
+      - name: total_supply_cost
+        description: "The total supply cost for the product in the given quarter and financial year"
+        tests:
+          - not_null
