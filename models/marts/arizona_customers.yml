@@ -1,0 +1,37 @@
+# models/marts/arizona_customers.yml
+
+version: 2
+
+models:
+  - name: arizona_customers
+    description: "Customers from Arizona"
+    columns:
+      - name: customer_id
+        description: "The unique identifier for a customer"
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        description: "Full name of the customer"
+      - name: state
+        description: "State of the customer (should always be 'Arizona')"
+        tests:
+          - accepted_values:
+              values: ['Arizona']
+      - name: count_lifetime_orders
+        description: "Total number of orders placed by the customer"
+      - name: first_ordered_at
+        description: "Timestamp of the customer's first order"
+      - name: last_ordered_at
+        description: "Timestamp of the customer's most recent order"
+      - name: lifetime_spend_pretax
+        description: "Total amount spent by the customer before tax"
+      - name: lifetime_tax_paid
+        description: "Total tax paid by the customer"
+      - name: lifetime_spend
+        description: "Total amount spent by the customer including tax"
+      - name: customer_type
+        description: "Type of customer ('new' or 'returning')"
+        tests:
+          - accepted_values:
+              values: ['new', 'returning']
