@@ -1,0 +1,17 @@
+semantic_models:
+  - name: total_supply_cost_per_product
+    description: |
+      This model represents the total supply cost per product till date.
+      It aggregates supply costs from the supplies table and joins with product information.
+    model: ref('total_supply_cost_per_product')
+    entities:
+      - name: product
+        type: primary
+        expr: product_id
+    dimensions:
+      - name: product_name
+        type: categorical
+      - name: product_type
+        type: categorical
+      - name: total_supply_cost
+        type: numeric
