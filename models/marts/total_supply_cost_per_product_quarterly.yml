@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: total_supply_cost_per_product_quarterly
+    description: "This model represents the total supply cost per product every quarter per financial year"
+    columns:
+      - name: product_id
+        description: "Unique identifier for the product"
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Name of the product"
+      - name: quarter
+        description: "Quarter of the financial year"
+      - name: financial_year
+        description: "Financial year"
+      - name: total_supply_cost
+        description: "Total supply cost for the product in the given quarter and financial year"
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - product_id
+            - quarter
+            - financial_year
