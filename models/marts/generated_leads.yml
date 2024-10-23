@@ -1,0 +1,33 @@
+# models/marts/generated_leads.yml
+
+version: 2
+
+models:
+  - name: generated_leads
+    description: "This model represents generated leads over the last month"
+    columns:
+      - name: customer_id
+        description: "The unique identifier for the customer"
+        tests:
+          - not_null
+          - unique
+      - name: first_order_date
+        description: "The date of the customer's first order within the last month"
+        tests:
+          - not_null
+      - name: total_orders
+        description: "The total number of orders placed by the customer in the last month"
+        tests:
+          - not_null
+      - name: customer_name
+        description: "The name of the customer"
+      - name: email
+        description: "The email address of the customer"
+
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "total_orders > 0"
+          description: "Ensure all leads have at least one order"
+
+    meta:
+      owner: "data_team@example.com"
